@@ -1,0 +1,66 @@
+# depslib dependency file v1.0
+1489585868 source:f:\fakhri w. n\data kuliah polban\jtk(tugas)\semester 2\proyek\codeblock\battletank\main.cpp
+	<graphics.h>
+	<stdio.h>
+
+1490518254 source:f:\fakhri w. n\data kuliah polban\jtk(tugas)\semester 2\proyek\codeblock\battle tank baru\main.cpp
+	<graphics.h>
+	<stdio.h>
+
+1490518254 source:e:\backup\fakhri w. n\data kuliah polban\jtk(tugas)\semester 2\proyek\codeblock\battle tank baru\main.cpp
+	<graphics.h>
+	<stdio.h>
+
+1491888737 source:f:\backup\fakhri w. n\data kuliah polban\jtk(tugas)\semester 2\proyek\codeblock\battle tank baru\main.cpp
+	<graphics.h>
+	<stdio.h>
+	<iostream>
+	<windows.h>
+	<mmsystem.h>
+
+1492029292 source:f:\backup\fakhri w. n\data kuliah polban\jtk(tugas)\semester 2\proyek\codeblock\butterfly tank(11april2017)\main.cpp
+	<graphics.h>
+	<stdio.h>
+	<iostream>
+	<windows.h>
+	<mmsystem.h>
+
+1492874693 source:f:\backup\fakhri w. n\data kuliah polban\jtk(tugas)\semester 2\proyek\codeblock\butterfly tank(20april2017) final\main.cpp
+	<graphics.h>
+	<stdio.h>
+	<iostream>
+	<windows.h>
+	<mmsystem.h>
+	"Fakhri_header.c"
+
+1492874271 f:\backup\fakhri w. n\data kuliah polban\jtk(tugas)\semester 2\proyek\codeblock\butterfly tank(20april2017) final\fakhri_header.c
+	"header.h"
+
+1492874040 f:\backup\fakhri w. n\data kuliah polban\jtk(tugas)\semester 2\proyek\codeblock\butterfly tank(20april2017) final\header.h
+
+1493205632 source:f:\backup\fakhri w. n\data kuliah polban\jtk(tugas)\semester 2\proyek\codeblock\butterfly tank(22april2017) final - hapus\main.cpp
+	<graphics.h>
+	<stdio.h>
+	<iostream>
+	<windows.h>
+	<mmsystem.h>
+	"Fakhri_header.c"
+
+1493204925 f:\backup\fakhri w. n\data kuliah polban\jtk(tugas)\semester 2\proyek\codeblock\butterfly tank(22april2017) final - hapus\fakhri_header.c
+	"header.h"
+
+1493205665 f:\backup\fakhri w. n\data kuliah polban\jtk(tugas)\semester 2\proyek\codeblock\butterfly tank(22april2017) final - hapus\header.h
+
+1493211698 source:f:\backup\fakhri w. n\data kuliah polban\jtk(tugas)\semester 2\proyek\codeblock\butterfly tank(26april2017)\main.cpp
+	<graphics.h>
+	<stdio.h>
+	<iostream>
+	<windows.h>
+	<mmsystem.h>
+	"Fakhri_header.c"
+
+1493212213 f:\backup\fakhri w. n\data kuliah polban\jtk(tugas)\semester 2\proyek\codeblock\butterfly tank(26april2017)\fakhri_header.c
+	"header.h"
+
+1493211204 f:\backup\fakhri w. n\data kuliah polban\jtk(tugas)\semester 2\proyek\codeblock\butterfly tank(26april2017)\header.h
+
