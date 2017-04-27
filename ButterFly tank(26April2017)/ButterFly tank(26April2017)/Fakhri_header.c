@@ -28,12 +28,13 @@ void gambar_tembok()
                 y=j*10;
                 readimagefile("pic/besi.bmp",x,y,x+10,y+10);
             }
-             if (all_stage[j][i].objekprint==9)
+             if (all_stage[j][i].objekprint==8)
             {
                 x=i*10;
                 y=j*10;
-                readimagefile("pic/air.bmp",x,y,x+10,y+10);
+                readimagefile("Youlose.bmp",x,y,x+10,y+10);
             }
+
 
         }
     }
@@ -236,14 +237,14 @@ void air()
     int tembok=0,tembok2=0;
     while(i<=MAX-1)
     {
-    if(all_stage[j][i].objekprint==2){
+    if(all_stage[j][i].objektimpa==2){
         setfillstyle(1,2);
         bar(0+tembok,0+tembok2,10+tembok,10+tembok2);}
         while(j<=MAX-1)
             {
             j++;
             tembok2 += 10;
-            if(all_stage[j][i].objekprint==2)//air
+            if(all_stage[j][i].objektimpa==2)//air
                 {
                 setfillstyle(1,9);
                 bar(0+tembok,0+tembok2,10+tembok,10+tembok2);
@@ -401,13 +402,15 @@ void Set_map(int t_stage[MAX][MAX])
     {
         for(j=0;j<MAX;j++)
         {
-            if(t_stage[j][i]==0 || t_stage[j][i]==1 || t_stage[j][i]==3 || t_stage[j][i]==4 || t_stage[j][i]==5 || t_stage[j][i]==6 || t_stage[j][i]==7)
+            if(t_stage[j][i]==0 || t_stage[j][i]==1 || t_stage[j][i]==3 || t_stage[j][i]==4 || t_stage[j][i]==5 || t_stage[j][i]==6 || t_stage[j][i]==7 || t_stage[j][i]==8)
             {
                 all_stage[j][i].objekprint=t_stage[j][i];
+                all_stage[j][i].objektimpa=0;
             }
-            if(t_stage[j][i]==4)
+            if(t_stage[j][i]==4 || t_stage[j][i]==2)
             {
                 all_stage[j][i].objektimpa=t_stage[j][i];
+                all_stage[j][i].objekprint=0;
             }
         }
     }

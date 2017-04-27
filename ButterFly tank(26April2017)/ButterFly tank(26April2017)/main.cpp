@@ -12,6 +12,7 @@ void Play_Game()
     cleardevice();
     TANK player_1,musuh_1,musuh_2,musuh_3;// Membuat data komposit untuk data player 1
 	int tambah=1;
+	bool T=0;
     int speed=10;// digunkan Perpindahan tank per 10 pixel
 
     //POSISI awal ban untuk vertikal
@@ -96,7 +97,7 @@ void Play_Game()
     }
     if(GetAsyncKeyState(115))
     {
-        Pindah_bawah(&player_1,speed);
+        Pindah_bawah(&musuh_1,speed);
     }
 
     if(GetAsyncKeyState(VK_SPACE) && player_1.jml_peluru==0)
@@ -145,7 +146,7 @@ void Play_Game()
             if((pp1==0 || pp1==2 || pp1==4) && (pp2==0 || pp2==2 || pp2==4))
             {
                 HapusPeluru(player_1);
-                player_1.gambar_peluru.x[0]+=100;
+                player_1.gambar_peluru.x[0]+=10; ///kec peluru
                 setfillstyle(SOLID_FILL,RED);
                 setcolor(RED);
                 pieslice(player_1.gambar_peluru.x[0],player_1.gambar_peluru.y[0]+5,0,360,4);
@@ -167,7 +168,6 @@ void Play_Game()
             {   //Tembok & Tembok                                       Kosong & Tembok                                        Kosong & Tembok
                 stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]-x]=0;
                 stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]-x]=0;
-                ///ini buat tembok jadi semua tembok gbisa di tembak
                 //setfillstyle(SOLID_FILL,BLACK);
                 //bar(player_1.gambar_peluru.x[0]+9,player_1.gambar_peluru.y[0]-6,player_1.gambar_peluru.x[0]+21,player_1.gambar_peluru.y[0]+16);
             }
@@ -216,6 +216,31 @@ void Play_Game()
             }
             /*Atas Menghancurkan Benda*/
 
+            if(stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]-x]==8 || stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]-x]==8)
+            {
+                player_1.score += 100;
+                setcolor(15);
+                player_1.life -= 1;                                 ///pengisian score
+                sprintf(player_1.scr,"%d",player_1.score);
+                T=1;
+                if (player_1.life < 1)
+                {
+                    player_1.life = 0;
+
+                }
+                sprintf(player_1.lfe,"%d",player_1.life);
+
+                Tmusuh += 1;
+                if(Tmusuh > 4)
+                {
+                    setfillstyle(1,0);
+                    bar(520,205,550,235);
+                    bar(450,10,490,60);
+                    msh=0;
+
+                }
+            }
+
             if(stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]-x]==6 || stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]-x]==6)
             {
                 player_1.score += 50;
@@ -259,13 +284,22 @@ void Play_Game()
             player_1.kordinat_peluru.x[1] -= 1;
 
             int x=1;
+
                 if((stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]+x]==3 && stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]+x]==3)|| (stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]+x]==0 && stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]+x]==3) || (stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]+x]==3 && stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]+x]==0)) //buat ngehancurin tembok
                 {   //Tembok & Tembok                                       Kosong & Tembok                                        Kosong & Tembok
                     //temp_stage=stage[pely][pelx];
                     //temp_stage2=stage[pely2][pelx2];
+                    stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]+x]=0; ///yang di rubah
+                    stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]+x]=0;
+                    setfillstyle(SOLID_FILL,BLACK);
+                    bar(player_1.gambar_peluru.x[0]-21,player_1.gambar_peluru.y[0]-4,player_1.gambar_peluru.x[0]-9,player_1.gambar_peluru.y[0]+16);
+                }
+                if((stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]+x]==8 && stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]+x]==8)|| (stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]+x]==0 && stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]+x]==8) || (stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]+x]==8 && stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]+x]==0)) //buat ngehancurin tembok
+                {   //Power up dan power up                                       Kosong & Power up                                        Kosong & Tembok
+                    //temp_stage=stage[pely][pelx];
+                    //temp_stage2=stage[pely2][pelx2];
                     stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]+x]=0;
                     stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]+x]=0;
-
                     setfillstyle(SOLID_FILL,BLACK);
                     bar(player_1.gambar_peluru.x[0]-21,player_1.gambar_peluru.y[0]-4,player_1.gambar_peluru.x[0]-9,player_1.gambar_peluru.y[0]+16);
                 }
@@ -297,19 +331,48 @@ void Play_Game()
                     setfillstyle(SOLID_FILL,BLACK);
                     bar(player_1.gambar_peluru.x[0]-21,player_1.gambar_peluru.y[0]+4,player_1.gambar_peluru.x[0]+9,player_1.gambar_peluru.y[0]+16);
                 }
+                else if ((stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]+x]==5 && stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]+x]==5))
+                {
+                    ///BAWAH BESI, ATAS BESI
+                    if (T==1)
+                    {
+                    stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]-x]=0;
+                    stage[player_1.kordinat_peluru.y[2]][player_1.kordinat_peluru.x[2]-x]=0; ///yang di rubah2
+                    setfillstyle(SOLID_FILL,BLACK);
+                    bar(player_1.gambar_peluru.x[0]-21,player_1.gambar_peluru.y[0]-4,player_1.gambar_peluru.x[0]-9,player_1.gambar_peluru.y[0]+16);
+                    }
+                }
                 else if (stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]-x]==3 && stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]-x]==5)
                 {   ///BAWAH BESI, ATAS TEMBOK
+                    if (T==1)
+                    {
+                    stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]-x]=0;
+                    stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]-x]=0;
+                    setfillstyle(SOLID_FILL,BLACK);
+                    bar(player_1.gambar_peluru.x[0]-21,player_1.gambar_peluru.y[0]-4,player_1.gambar_peluru.x[0]-9,player_1.gambar_peluru.y[0]+16);
+                    }
+                    else{
                     stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]-x]=0;
                     stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]-x]=5;
                     setfillstyle(SOLID_FILL,BLACK);
                     bar(player_1.gambar_peluru.x[0]-21,player_1.gambar_peluru.y[0]-4,player_1.gambar_peluru.x[0]+9,player_1.gambar_peluru.y[0]+6);
+                    }
                 }
                 else if (stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]-x]==5 && stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]-x]==3)
                 {   ///BAWAH TEMBOK, ATAS BESI
+                    if (T==1)
+                    {
+                    stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]-x]=0;
+                    stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]-x]=0;
+                    setfillstyle(SOLID_FILL,BLACK);
+                    bar(player_1.gambar_peluru.x[0]-21,player_1.gambar_peluru.y[0]-4,player_1.gambar_peluru.x[0]-9,player_1.gambar_peluru.y[0]+16);
+                    }
+                    else{
                     stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]-x]=5;
                     stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]-x]=0;
                     setfillstyle(SOLID_FILL,BLACK);
                     bar(player_1.gambar_peluru.x[0]-21,player_1.gambar_peluru.y[0]+4,player_1.gambar_peluru.x[0]+9,player_1.gambar_peluru.y[0]+16);
+                    }
                 }
                 if((stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]+x]==6 && stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]+x]==6)|| (stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]+x]==0 && stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]+x]==6) || (stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]+x]==6 && stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]+x]==0))
                 {
@@ -482,13 +545,13 @@ void Play_Game()
 }
 
 int main()
-{   PlaySound("song/themesong.wav",NULL,SND_FILENAME|SND_LOOP|SND_ASYNC);
+{   PlaySound("themesong.wav",NULL,SND_FILENAME|SND_LOOP|SND_ASYNC);
 
     POINT cpos;
 
     initwindow(640,480,"Battle Tank v2.0");
 
-    readimagefile("pic/mainmenu.bmp",0,0,640,480);
+    readimagefile("mainmenu.bmp",0,0,640,480);
 
  //       setcolor(BLUE);
 
@@ -511,7 +574,7 @@ int main()
             {
                 setfillstyle(1,0);
                 bar(0,0,640,480);
-                readimagefile("pic/About Us.bmp", 100,0,480,480);
+                readimagefile("About Us.bmp", 100,0,480,480);
                 setcolor(WHITE);
                 settextstyle(1, HORIZ_DIR, 5);
                 outtextxy(0,0,"x");
