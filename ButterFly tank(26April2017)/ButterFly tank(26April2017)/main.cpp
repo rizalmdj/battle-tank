@@ -84,7 +84,7 @@ void Play_Game()
     }
     else if(GetAsyncKeyState(VK_LEFT))
     {
-        Pindah_kiri(&musuh_1,speed);
+        Pindah_kiri(&player_1,speed);
     }
     else if(GetAsyncKeyState(VK_UP))
     {
@@ -96,7 +96,7 @@ void Play_Game()
     }
     if(GetAsyncKeyState(115))
     {
-        Pindah_bawah(&musuh_1,speed);
+        Pindah_bawah(&player_1,speed);
     }
 
     if(GetAsyncKeyState(VK_SPACE) && player_1.jml_peluru==0)
@@ -145,7 +145,7 @@ void Play_Game()
             if((pp1==0 || pp1==2 || pp1==4) && (pp2==0 || pp2==2 || pp2==4))
             {
                 HapusPeluru(player_1);
-                player_1.gambar_peluru.x[0]+=10;
+                player_1.gambar_peluru.x[0]+=100;
                 setfillstyle(SOLID_FILL,RED);
                 setcolor(RED);
                 pieslice(player_1.gambar_peluru.x[0],player_1.gambar_peluru.y[0]+5,0,360,4);
@@ -167,6 +167,7 @@ void Play_Game()
             {   //Tembok & Tembok                                       Kosong & Tembok                                        Kosong & Tembok
                 stage[player_1.kordinat_peluru.y[0]][player_1.kordinat_peluru.x[0]-x]=0;
                 stage[player_1.kordinat_peluru.y[1]][player_1.kordinat_peluru.x[1]-x]=0;
+                ///ini buat tembok jadi semua tembok gbisa di tembak
                 //setfillstyle(SOLID_FILL,BLACK);
                 //bar(player_1.gambar_peluru.x[0]+9,player_1.gambar_peluru.y[0]-6,player_1.gambar_peluru.x[0]+21,player_1.gambar_peluru.y[0]+16);
             }
@@ -481,13 +482,13 @@ void Play_Game()
 }
 
 int main()
-{   PlaySound("themesong.wav",NULL,SND_FILENAME|SND_LOOP|SND_ASYNC);
+{   PlaySound("song/themesong.wav",NULL,SND_FILENAME|SND_LOOP|SND_ASYNC);
 
     POINT cpos;
 
     initwindow(640,480,"Battle Tank v2.0");
 
-    readimagefile("mainmenu.bmp",0,0,640,480);
+    readimagefile("pic/mainmenu.bmp",0,0,640,480);
 
  //       setcolor(BLUE);
 
@@ -510,7 +511,7 @@ int main()
             {
                 setfillstyle(1,0);
                 bar(0,0,640,480);
-                readimagefile("About Us.bmp", 100,0,480,480);
+                readimagefile("pic/About Us.bmp", 100,0,480,480);
                 setcolor(WHITE);
                 settextstyle(1, HORIZ_DIR, 5);
                 outtextxy(0,0,"x");

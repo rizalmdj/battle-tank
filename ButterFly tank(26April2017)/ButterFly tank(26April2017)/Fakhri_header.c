@@ -28,6 +28,12 @@ void gambar_tembok()
                 y=j*10;
                 readimagefile("pic/besi.bmp",x,y,x+10,y+10);
             }
+             if (all_stage[j][i].objekprint==9)
+            {
+                x=i*10;
+                y=j*10;
+                readimagefile("pic/air.bmp",x,y,x+10,y+10);
+            }
 
         }
     }
