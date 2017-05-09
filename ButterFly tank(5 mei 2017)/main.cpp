@@ -131,13 +131,13 @@ void Play_Game()
 }
 
 int main()
-{   PlaySound("themesong.wav",NULL,SND_FILENAME|SND_LOOP|SND_ASYNC);
+{   PlaySound("song/themesong.wav",NULL,SND_FILENAME|SND_LOOP|SND_ASYNC);
 
     POINT cpos;
 
     initwindow(640,480,"Battle Tank v2.0");
 
-    readimagefile("mainmenu.bmp",0,0,640,480);
+    readimagefile("pic/mainmenu.bmp",0,0,640,480);
 
  //       setcolor(BLUE);
 
@@ -160,7 +160,7 @@ int main()
             {
                 setfillstyle(1,0);
                 bar(0,0,640,480);
-                readimagefile("About Us.bmp", 100,0,480,480);
+                readimagefile("pic/About Us.bmp", 100,0,480,480);
                 setcolor(WHITE);
                 settextstyle(1, HORIZ_DIR, 5);
                 outtextxy(0,0,"x");

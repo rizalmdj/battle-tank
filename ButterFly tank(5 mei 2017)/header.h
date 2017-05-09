@@ -1,5 +1,5 @@
 ///CEK ATAS
-#define p1(P1) all_stage[(P1).posisi.baris[0]-1][(P1).posisi.kolom[0]].objekprint
+#define p1(P1) all_stage[(P1).posisi.baris[0]-1][(P1).posisi.kolom[0]].objekprint ///jijijijjiijijijijijijij
 #define p2(P1) all_stage[(P1).posisi.baris[0]-1][(P1).posisi.kolom[1]].objekprint
 #define p3(P1) all_stage[(P1).posisi.baris[0]-1][(P1).posisi.kolom[2]].objekprint
 #define p4(P1) all_stage[(P1).posisi.baris[0]-1][(P1).posisi.kolom[3]].objekprint
