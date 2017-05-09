@@ -3,7 +3,7 @@
 #include <iostream>     ///final
 #include <windows.h>
 #include <mmsystem.h>
-#include "Fakhri_header.c"
+#include "Fakhri_header.c" ////percobaan
 
 
 
