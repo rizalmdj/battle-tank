@@ -21,6 +21,8 @@ void Play_Game()
     Set_map(stage1);
     Set_player(&player_1);
     Set_enemy_1(&musuh_1);
+    Set_enemy_2(&musuh_2);
+    Set_enemy_3(&musuh_3);
 
     int page=0;
     char arr[10];
@@ -57,6 +59,7 @@ void Play_Game()
         {
             Vtank(&player_1);
         }
+
         if(musuh_1.key==0 || musuh_1.key==1 )
         {
             Htank(&musuh_1);
@@ -66,67 +69,92 @@ void Play_Game()
             Vtank(&musuh_1);
         }
 
-    while(garuda){
+        if(musuh_2.key==0 || musuh_2.key==1 )
+        {
+            Htank(&musuh_2);
+        }
+        else if (musuh_2.key==2 || musuh_2.key==3)
+        {
+            Vtank(&musuh_2);
+        }
+
+        if(musuh_3.key==0 || musuh_3.key==1 )
+        {
+            Htank(&musuh_3);
+        }
+        else if (musuh_3.key==2 || musuh_3.key==3)
+        {
+            Vtank(&musuh_3);
+        }
+
+
+    while(garuda)
+    {
+        gambar_musuh();
         settextstyle(1,0,2);
         outtextxy(557,215,player_1.lfe);
         setcolor(4);
         outtextxy(515,55,player_1.scr);
         outtextxy(557,215,player_1.lfe);
 
-        HapusTank(&musuh_1);
+        //HapusTank(&musuh_1);
 
 
-    if(GetAsyncKeyState(VK_RIGHT))
-    {
-        Gerak_kanan(&player_1,speed);
-    }
-    else if(GetAsyncKeyState(VK_LEFT))
-    {
-        Gerak_kiri(&player_1,speed);
-    }
-    else if(GetAsyncKeyState(VK_UP))
-    {
-        Gerak_atas(&player_1,speed);
-    }
-    else if(GetAsyncKeyState(VK_DOWN))
-    {
-        Gerak_bawah(&player_1,speed);
-    }
 
-    if(musuh_1.posisi.baris[0]<player_1.posisi.baris[0])
-    {
-        Gerak_bawah(&musuh_1,speed);
-        Rumput();
-    }
-    else if(musuh_1.posisi.baris[0]>player_1.posisi.baris[0])
-    {
-        Gerak_atas(&musuh_1,speed);
-        Rumput();
-    }
-    else if(musuh_1.posisi.kolom[0]<player_1.posisi.kolom[0])
-    {
-        Gerak_kanan(&musuh_1,speed);
-        Rumput();
-    }
-    else if(musuh_1.posisi.kolom[0]>player_1.posisi.kolom[0])
-    {
-        Gerak_kiri(&musuh_1,speed);
-        Rumput();
-    }
 
-    if(GetAsyncKeyState(VK_SPACE) && player_1.jml_peluru==0)
-    {
-        tembak(&player_1);
-    }
+        if(GetAsyncKeyState(VK_RIGHT))
+        {
+            Gerak_kanan(&player_1,speed);
+        }
+        else if(GetAsyncKeyState(VK_LEFT))
+        {
+            Gerak_kiri(&player_1,speed);
+        }
+        else if(GetAsyncKeyState(VK_UP))
+        {
+            Gerak_atas(&player_1,speed);
+        }
+        else if(GetAsyncKeyState(VK_DOWN))
+        {
+            Gerak_bawah(&player_1,speed);
+        }
 
-/*dibawah untuk nembak sambil bisa gerak (masih belum pas perhitungannya)*/
-    if(player_1.jml_peluru==1)
-    {
-        Gerak_peluru(&player_1,&garuda);
-    }
-/*diatas untuk nembak sambil bisa gerak (masih belum pas perhitungannya)*/
-//Harus di LUAR
-    delay(30);
+        if(musuh_1.posisi.baris[0]<player_1.posisi.baris[0])
+        {
+            Gerak_bawah(&musuh_1,speed);
+            Rumput();
+        }
+        else if(musuh_1.posisi.baris[0]>player_1.posisi.baris[0])
+        {
+            Gerak_atas(&musuh_1,speed);
+            Rumput();
+        }
+        else if(musuh_1.posisi.kolom[0]<player_1.posisi.kolom[0])
+        {
+            Gerak_kanan(&musuh_1,speed);
+            Rumput();
+        }
+        else if(musuh_1.posisi.kolom[0]>player_1.posisi.kolom[0])
+        {
+            Gerak_kiri(&musuh_1,speed);
+            Rumput();
+        }
+
+        if(GetAsyncKeyState(VK_SPACE) && player_1.jml_peluru==0)
+        {
+            tembak(&player_1);
+        }
+
+    /*dibawah untuk nembak sambil bisa gerak (masih belum pas perhitungannya)*/
+        if(player_1.jml_peluru==1)
+        {
+            Gerak_peluru(&player_1,&musuh_1,&musuh_2,&musuh_3,&garuda);
+        }
+        CekHancur(&player_1);
+        CekHancur(&musuh_1);
+    /*diatas untuk nembak sambil bisa gerak (masih belum pas perhitungannya)*/
+    //Harus di LUAR
+        delay(30);
     }
     Game_Over();
 }

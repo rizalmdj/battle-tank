@@ -73,12 +73,13 @@ struct infohapus
 };
 struct TANK
 {
+    int Tank;
     infoposisi posisi;
     infoban banV;
     infoban banH;
     moncong Moncong;
-    infokordinat kordinat_tank;
     infohapus hapus;
+    boolean Hancur;
     int key;    ///Identitas untuk arah kanan kiri atas bawah
     int ktemp;
     char scr[5]={'0'};
@@ -87,6 +88,7 @@ struct TANK
     int warna[2];
     int score=0;
     int jml_peluru=0;
+    infokordinat kordinat_tank;
     infokordinat kordinat_peluru;
     infokordinat gambar_peluru;
 };
@@ -169,3 +171,5 @@ void PindahObjek6 (TANK *tank);
 void tembak (TANK *tank);
 
 void Gerak_peluru (TANK *tank);
+
+void SetObjek0(int,int);

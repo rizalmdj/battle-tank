@@ -1,6 +1,8 @@
 
 #include "header.h"
 
+
+
 void Game_Over()
 {
     cleardevice();
@@ -55,11 +57,12 @@ void gambar_musuh()
     {
         for(j=0;j<MAX; j++)
         {
-            if (all_stage[j][i].objekprint==20)
+            if (all_stage[j][i].objekprint==6)
             {
                 x=i*10;
                 y=j*10;
-                readimagefile("garuda.bmp",x,y,x+10,y+10);
+                setfillstyle(1,WHITE);
+                bar(x,y,x+10,y+10);
             }
         }
     }
@@ -142,6 +145,9 @@ void Htank(TANK *s_tank)
 
 void Set_player(TANK *tank)
 {
+    tank->Hancur=false;
+    tank->Tank=1;
+
     tank->banV.kordinat.x[0]=170;//0 Karena c mulai dari 0
     tank->banV.kordinat.x[1]=210;
     tank->banV.kordinat.y[0]=450;
@@ -177,6 +183,9 @@ void Set_player(TANK *tank)
 
 void Set_enemy_1(TANK *tank)
 {
+    tank->Hancur=false;
+    tank->Tank=3;
+
     tank->banV.kordinat.x[0]=450;//0 Karena c mulai dari 0
     tank->banV.kordinat.x[1]=490;
     tank->banV.kordinat.y[0]=40;
@@ -206,12 +215,15 @@ void Set_enemy_1(TANK *tank)
     ///Warna ban
     tank->warna[0] = 4, tank->warna[1]=14;
     ///Posisi tank kanan=0 kiri=1 atas=2 bawah=3
-    tank->key=1;
+    tank->key=3;
     //
 }
 
 void Set_enemy_2(TANK *tank)
 {
+    tank->Hancur=false;
+    tank->Tank=4;
+
     tank->banV.kordinat.x[0]=230;//0 Karena c mulai dari 0
     tank->banV.kordinat.x[1]=270;
     tank->banV.kordinat.y[0]=40;
@@ -247,6 +259,9 @@ void Set_enemy_2(TANK *tank)
 
 void Set_enemy_3(TANK *tank)
 {
+    tank->Hancur=false;
+    tank->Tank=5;
+
     tank->banV.kordinat.x[0]=10;//0 Karena c mulai dari 0
     tank->banV.kordinat.x[1]=50;
     tank->banV.kordinat.y[0]=40;
@@ -502,6 +517,21 @@ void Set_map(int t_stage[MAX][MAX])
     }
 }
 
+void SetObjek0(int x,int y)
+{
+    int i=x,j;
+
+        while(i<x+4)
+        {
+            j=y;
+            while(j<y+4)
+            {
+                all_stage[j][i].objekprint=0;
+                j++;
+            }
+            i++;
+        }
+}
 void PindahObjek6 (TANK *tank)
 {
     int i,j;
@@ -591,7 +621,7 @@ void tembak(TANK *tank)
         tank->ktemp=tank->key;
 }
 
-void Gerak_peluru(TANK *tank, boolean *garuda)
+void Gerak_peluru(TANK *tank,TANK *tank2,TANK *tank3,TANK *tank4,boolean *garuda)
 {
     /*Kanan*/
     if(tank->ktemp==0)
@@ -665,6 +695,21 @@ void Gerak_peluru(TANK *tank, boolean *garuda)
                 setfillstyle(SOLID_FILL,BLACK);
                 bar(tank->gambar_peluru.x[0]+9,tank->gambar_peluru.y[0]-1,tank->gambar_peluru.x[0]+21,tank->gambar_peluru.y[0]+11);
             }
+            else if((all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objekprint==6 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objekprint==6)|| (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objekprint==0 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objekprint==6) || (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objekprint==6 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objekprint==0))
+                {
+                    if(tank->kordinat_peluru.x[0]-x==tank2->posisi.kolom[0])
+                    {
+                        tank2->Hancur=true;
+                    }
+                    else if(tank->kordinat_peluru.x[0]-x==tank3->posisi.kolom[0])
+                    {
+                        tank3->Hancur=true;
+                    }
+                    else if(tank->kordinat_peluru.x[0]-x==tank3->posisi.kolom[0])
+                    {
+                        tank4->Hancur=true;
+                    }
+                }
             /*Atas Menghancurkan Benda*/
 			/*
             if(all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objekprint==11 || all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objekprint==11)
@@ -744,27 +789,28 @@ void Gerak_peluru(TANK *tank, boolean *garuda)
                     setfillstyle(SOLID_FILL,BLACK);
                     bar(tank->gambar_peluru.x[0]-21,tank->gambar_peluru.y[0]-11,tank->gambar_peluru.x[0]-9,tank->gambar_peluru.y[0]+1);
                 }
-                else if (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objektimpa==2 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objekprint==3)
+                else if (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objektimpa==2 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]+x].objekprint==3)
                 {   ///BAWAH TEMBOK, ATAS air
-                    all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objektimpa=2;
-                    all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objekprint=0;
+                    all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objektimpa=2;
+                    all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]+x].objekprint=0;
                     setfillstyle(SOLID_FILL,BLACK);
                     bar(tank->gambar_peluru.x[0]-21,tank->gambar_peluru.y[0]-1,tank->gambar_peluru.x[0]-9,tank->gambar_peluru.y[0]+11);
                 }
-                else if (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objekprint==3 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objekprint==5)
+                else if (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objekprint==3 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]+x].objekprint==5)
                 {   ///BAWAH BESI, ATAS TEMBOK
-                    all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objekprint=0;
-                    all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objekprint=5;
+                    all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objekprint=0;
+                    all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]+x].objekprint=5;
                     setfillstyle(SOLID_FILL,BLACK);
                     bar(tank->gambar_peluru.x[0]-21,tank->gambar_peluru.y[0]-11,tank->gambar_peluru.x[0]-9,tank->gambar_peluru.y[0]+1);
                 }
-                else if (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objekprint==5 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objekprint==3)
+                else if (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objekprint==5 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]+x].objekprint==3)
                 {   ///BAWAH TEMBOK, ATAS BESI
-                    all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objekprint=5;
-                    all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objekprint=0;
+                    all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objekprint=5;
+                    all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]+x].objekprint=0;
                     setfillstyle(SOLID_FILL,BLACK);
                     bar(tank->gambar_peluru.x[0]-21,tank->gambar_peluru.y[0]-1,tank->gambar_peluru.x[0]-9,tank->gambar_peluru.y[0]+11);
                 }
+
                 else if((all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objekprint==11 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]+x].objekprint==11)|| (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objekprint==0 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]+x].objekprint==11) || (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objekprint==11 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]+x].objekprint==0))
                 {
                     /*Kalau Garuda tertembak Langsung Game Over bukan nambah score yee*/
@@ -775,6 +821,7 @@ void Gerak_peluru(TANK *tank, boolean *garuda)
                     bar(tank->gambar_peluru.x[0]-51,tank->gambar_peluru.y[0]-21,tank->gambar_peluru.x[0]-9,tank->gambar_peluru.y[0]+21);
                     /*ini ganti sama animasi/gambar garuda ancur, Saudara PHUU(kordinat di atas pake udah benar)*/
                     *garuda=false;
+
                     tank->score += 50;
                     tank->life -= 1;
                     Tmusuh += 1;                               ///pengisian score
@@ -985,4 +1032,29 @@ void Gerak_peluru(TANK *tank, boolean *garuda)
                 bar(tank->gambar_peluru.x[0]-11,tank->gambar_peluru.y[0]+9,tank->gambar_peluru.x[0]+1,tank->gambar_peluru.y[0]+21);
             }
         }
+}
+
+void CekHancur(TANK *tank)
+{
+    if(tank->Hancur)
+    {
+        SetObjek0(tank->posisi.kolom[0],tank->posisi.baris[0]);
+        if(tank->Tank==1)
+        {
+            Set_player(&(*tank));
+        }
+        else if(tank->Tank==3)
+        {
+            Set_enemy_1(&(*tank));
+        }
+        else if(tank->Tank==4)
+        {
+            Set_enemy_2(&(*tank));
+        }
+        else if(tank->Tank==5)
+        {
+            Set_enemy_3(&(*tank));
+        }
+    }
+
 }
