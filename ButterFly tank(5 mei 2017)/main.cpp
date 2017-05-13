@@ -3,7 +3,7 @@
 #include <iostream>     ///final
 #include <windows.h>
 #include <mmsystem.h>
-#include "Fakhri_header.c" ////percobaan
+#include "Fakhri_header.c"
 
 
 
@@ -14,6 +14,7 @@ void Play_Game()
     TANK player_1,musuh_1,musuh_2,musuh_3;// Membuat data komposit untuk data player 1
 	int tambah=1;
     int speed=10;// digunkan Perpindahan tank per 10 pixel
+    boolean garuda=true;
 
     //POSISI awal ban untuk vertikal
 
@@ -46,8 +47,7 @@ void Play_Game()
         gambar_tembok();
         Rumput();
         air();
-    //    settextstyle(1,0,2);
-    //    bar(530,205,550,235);
+
 
         if(player_1.key==0 || player_1.key==1 )
         {
@@ -66,7 +66,7 @@ void Play_Game()
             Vtank(&musuh_1);
         }
 
-    while(1){
+    while(garuda){
         settextstyle(1,0,2);
         outtextxy(557,215,player_1.lfe);
         setcolor(4);
@@ -122,16 +122,17 @@ void Play_Game()
 /*dibawah untuk nembak sambil bisa gerak (masih belum pas perhitungannya)*/
     if(player_1.jml_peluru==1)
     {
-        Gerak_peluru(&player_1);
+        Gerak_peluru(&player_1,&garuda);
     }
 /*diatas untuk nembak sambil bisa gerak (masih belum pas perhitungannya)*/
 //Harus di LUAR
     delay(30);
     }
+    Game_Over();
 }
 
 int main()
-{   PlaySound("song/themesong.wav",NULL,SND_FILENAME|SND_LOOP|SND_ASYNC);
+{   //PlaySound("song/themesong.wav",NULL,SND_FILENAME|SND_LOOP|SND_ASYNC);
 
     POINT cpos;
 

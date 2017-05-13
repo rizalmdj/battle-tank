@@ -1,6 +1,12 @@
 
 #include "header.h"
 
+void Game_Over()
+{
+    cleardevice();
+    setcolor(WHITE);
+    outtextxy(170,220,"GAME OVER CUY!!");
+}
 void gambar_tembok()
 {
     int i, j, x,y;
@@ -585,8 +591,9 @@ void tembak(TANK *tank)
         tank->ktemp=tank->key;
 }
 
-void Gerak_peluru(TANK *tank)
+void Gerak_peluru(TANK *tank, boolean *garuda)
 {
+    /*Kanan*/
     if(tank->ktemp==0)
         {
             if((pp1(*tank)==0 || pp1(*tank)==2 || oot1(*tank)==4) && (pp2(*tank)==0 || pp2(*tank)==2 || oot2(*tank)==4))
@@ -686,6 +693,7 @@ void Gerak_peluru(TANK *tank)
             */
 
         }
+        /*kiri*/
         if(tank->ktemp==1)
         {
             if((pp1(*tank)==0 || pp1(*tank)==2 || oot1(*tank)==4) && (pp2(*tank)==0 || pp2(*tank)==2 || oot2(*tank)==4))
@@ -706,7 +714,7 @@ void Gerak_peluru(TANK *tank)
             tank->kordinat_peluru.x[0] -= 1;
             tank->kordinat_peluru.x[1] -= 1;
 
-            int x=1; //kiri
+            int x=1;
                 if((all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objekprint==3 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]+x].objekprint==3) || ((all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objekprint==0 && all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objektimpa==0) && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]+x].objekprint==3) || (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objekprint==3 && (all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]+x].objekprint==0 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]+x].objektimpa==0))) //buat ngehancurin tembok
                 {   //Tembok & Tembok                                       Kosong & Tembok                                        Kosong & Tembok
                     all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objekprint=0;
@@ -757,13 +765,16 @@ void Gerak_peluru(TANK *tank)
                     setfillstyle(SOLID_FILL,BLACK);
                     bar(tank->gambar_peluru.x[0]-21,tank->gambar_peluru.y[0]-1,tank->gambar_peluru.x[0]-9,tank->gambar_peluru.y[0]+11);
                 }
-                if((all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objekprint==11 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]+x].objekprint==11)|| (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objekprint==0 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]+x].objekprint==11) || (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objekprint==11 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]+x].objekprint==0))
+                else if((all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objekprint==11 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]+x].objekprint==11)|| (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objekprint==0 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]+x].objekprint==11) || (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objekprint==11 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]+x].objekprint==0))
                 {
+                    /*Kalau Garuda tertembak Langsung Game Over bukan nambah score yee*/
                 	all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objekprint=0;
                     all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]+x].objekprint=0;
-
+                    /*ini ganti sama animasi/gambar garuda ancur, Saudara PHUU (kordinat di bawah pake udah benar)*/
                     setfillstyle(SOLID_FILL,BLACK);
-                    bar(tank->gambar_peluru.x[0]-21,tank->gambar_peluru.y[0]-11,tank->gambar_peluru.x[0]-9,tank->gambar_peluru.y[0]+11);
+                    bar(tank->gambar_peluru.x[0]-51,tank->gambar_peluru.y[0]-21,tank->gambar_peluru.x[0]-9,tank->gambar_peluru.y[0]+21);
+                    /*ini ganti sama animasi/gambar garuda ancur, Saudara PHUU(kordinat di atas pake udah benar)*/
+                    *garuda=false;
                     tank->score += 50;
                     tank->life -= 1;
                     Tmusuh += 1;                               ///pengisian score
@@ -783,6 +794,7 @@ void Gerak_peluru(TANK *tank)
                     }
                 }
         }
+        /*Atas*/
         if(tank->ktemp==2)
         {
             if((pp1(*tank)==0 || pp1(*tank)==2 || oot1(*tank)==4) && (pp2(*tank)==0 || pp2(*tank)==2 || oot2(*tank)==4))
@@ -884,7 +896,7 @@ void Gerak_peluru(TANK *tank)
                 bar(tank->gambar_peluru.x[0]-11,tank->gambar_peluru.y[0]-15,tank->gambar_peluru.x[0]+1,tank->gambar_peluru.y[0]-9);
                 air();
             }
-            
+
                 /*if((all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x]==3 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x]==3)|| (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x]==0 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x]==3) || (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x]==3 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x]==0)) //buat ngehancurin tembok
                 {   //Tembok & Tembok                                       Kosong & Tembok                                        Kosong & Tembok
                     //temp_all_stage=all_stage[pely][pelx];
@@ -900,6 +912,7 @@ void Gerak_peluru(TANK *tank)
                     bar(tank->gambar_peluru.x[0]-20,tank->gambar_peluru.y[0]-5,tank->gambar_peluru.x[0]-10,tank->gambar_peluru.y[0]+15);
                 }*/
             }
+        /*Bawah*/
         if(tank->ktemp==3)
         {
             if((pp1(*tank)==0 || pp1(*tank)==2 || oot1(*tank)==4) && (pp2(*tank)==0 || pp2(*tank)==2 || oot2(*tank)==4))
