@@ -90,7 +90,7 @@ void Play_Game()
 
     while(garuda)
     {
-        gambar_musuh(); ///garuda nya 
+        gambar_musuh(); ///garuda nya
         settextstyle(1,0,2);
         outtextxy(557,215,player_1.lfe);
         setcolor(4);
@@ -160,7 +160,7 @@ void Play_Game()
 }
 
 int main()
-{   //PlaySound("song/themesong.wav",NULL,SND_FILENAME|SND_LOOP|SND_ASYNC);
+{   //PlaySound("song/themesong.wav",NULL,SND_FILENAME|SND_LOOP|SND_ASYNC); ////////kiki
 
     POINT cpos;
 
