@@ -5,10 +5,37 @@
 
 void Game_Over()
 {
-    cleardevice();
-    setcolor(WHITE);
-    readimagefile("pic/kalah.bmp",170,220,170,220);
+	int x=150;
+	int a=100;
+	int y=1;
+	int z=50;
+	cleardevice();
+    readimagefile("pic/kalah/1.bmp",0,0,640,480);
+    delay(x);
+    readimagefile("pic/kalah/2.bmp",0,0,640,480);
+    delay(x);
+    readimagefile("pic/kalah/3.bmp",0,0,640,480);
+    delay(x);
+    readimagefile("pic/kalah/4.bmp",0,0,640,480);
+    delay(x);
+    readimagefile("pic/kalah/5.bmp",0,0,640,480);
+    delay(x);
+    readimagefile("pic/kalah/6.bmp",0,0,640,480);
+    delay(x);
+    readimagefile("pic/kalah/7.bmp",0,0,640,480);
+    delay(x);
+    while (y<=z)
+    {
+    	readimagefile("pic/kalah/continue2.bmp",0,0,640,480);
+    	delay(a);
+    	readimagefile("pic/kalah/continue.bmp",0,0,640,480);
+    	delay(a);
+    	y++;
+	}
 }
+
+
+
 void gambar_tembok()
 {
     int i, j, x,y;
