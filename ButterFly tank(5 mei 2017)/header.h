@@ -1,7 +1,7 @@
 ///CEK ATAS
 #define p1(P1) all_stage[(P1).posisi.baris[0]-1][(P1).posisi.kolom[0]].objekprint ///jijijijjiijijijijijijij
 #define p2(P1) all_stage[(P1).posisi.baris[0]-1][(P1).posisi.kolom[1]].objekprint
-#define p3(P1) all_stage[(P1).posisi.baris[0]-1][(P1).posisi.kolom[2]].objekprint
+#define p3(P1) all_stage[(P1).posisi.baris[0]-1][(P1).posisi.kolom[2]].objekprint//lololololololol
 #define p4(P1) all_stage[(P1).posisi.baris[0]-1][(P1).posisi.kolom[3]].objekprint
 #define ot1(P1) all_stage[(P1).posisi.baris[0]-1][(P1).posisi.kolom[0]].objektimpa
 #define ot2(P1) all_stage[(P1).posisi.baris[0]-1][(P1).posisi.kolom[1]].objektimpa
