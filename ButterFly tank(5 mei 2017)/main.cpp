@@ -90,7 +90,7 @@ void Play_Game()
 
     while(garuda)
     {
-        gambar_musuh();
+        gambar_musuh(); ///garuda nya 
         settextstyle(1,0,2);
         outtextxy(557,215,player_1.lfe);
         setcolor(4);

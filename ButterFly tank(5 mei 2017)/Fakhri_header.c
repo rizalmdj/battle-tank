@@ -7,7 +7,7 @@ void Game_Over()
 {
     cleardevice();
     setcolor(WHITE);
-    outtextxy(170,220,"GAME OVER CUY!!");
+    readimagefile("pic/kalah.bmp",170,220,170,220);
 }
 void gambar_tembok()
 {
@@ -48,7 +48,7 @@ void gambar_tembok()
     }
 }
 
-void gambar_musuh()
+void gambar_musuh() ///garuda
 {
 
     int i, j, x,y;
@@ -817,10 +817,11 @@ void Gerak_peluru(TANK *tank,TANK *tank2,TANK *tank3,TANK *tank4,boolean *garuda
                 	all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]+x].objekprint=0;
                     all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]+x].objekprint=0;
                     /*ini ganti sama animasi/gambar garuda ancur, Saudara PHUU (kordinat di bawah pake udah benar)*/
+                    /*maaf saudara acong jadi bagai mana saya masih belum mengerti kodingan saudara*/
                     setfillstyle(SOLID_FILL,BLACK);
                     bar(tank->gambar_peluru.x[0]-51,tank->gambar_peluru.y[0]-21,tank->gambar_peluru.x[0]-9,tank->gambar_peluru.y[0]+21);
                     /*ini ganti sama animasi/gambar garuda ancur, Saudara PHUU(kordinat di atas pake udah benar)*/
-                    *garuda=false;
+                    *garuda=false;  ///kondisi dimana akan kalah
 
                     tank->score += 50;
                     tank->life -= 1;
