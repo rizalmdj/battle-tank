@@ -7,6 +7,7 @@
 
 
 
+
 void Play_Game()
 {
     cleardevice();
@@ -14,7 +15,7 @@ void Play_Game()
     TANK player_1,musuh_1,musuh_2,musuh_3;// Membuat data komposit untuk data player 1
 	int tambah=1;
     int speed=10;// digunkan Perpindahan tank per 10 pixel
-    boolean garuda=true;
+    boolean garuda=true;//garuda itu true
 
     //POSISI awal ban untuk vertikal
 
@@ -24,9 +25,24 @@ void Play_Game()
     Set_enemy_2(&musuh_2);
     Set_enemy_3(&musuh_3);
 
+    POINT cpos;
     int page=0;
     char arr[10];
+    readimagefile("pic/samping.bmp",500,0,640,470);//Gambar menu di samping baru
 
+
+        GetCursorPos(&cpos);
+        if (GetAsyncKeyState(VK_LBUTTON))
+    	{
+            if((cpos.x>=110 && cpos.y>=440) && (cpos.x<=230 && cpos.y<=540))
+            {
+                main();
+            }
+    	}
+
+
+
+ /*
     //gambar_musuh();//ARENA (print menu di sebelah)
         setfillstyle(1,6);
         bar(500,0,640,470);
@@ -46,9 +62,11 @@ void Play_Game()
         settextstyle(1,0,2);
         setfillstyle(1,7);
         bar(520,205,550,235);
+        */
         gambar_tembok();
         Rumput();
         air();
+
 
 
         if(player_1.key==0 || player_1.key==1 )
@@ -93,9 +111,10 @@ void Play_Game()
         gambar_musuh(); ///garuda nya
         settextstyle(1,0,2);
         outtextxy(557,215,player_1.lfe);
-        setcolor(4);
-        outtextxy(515,55,player_1.scr);
+        setcolor(2);
+        outtextxy(548,138,player_1.scr); //BARU (thee)
         outtextxy(557,215,player_1.lfe);
+
 
         //HapusTank(&musuh_1);
 

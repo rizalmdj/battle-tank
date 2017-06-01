@@ -1,6 +1,63 @@
 
 #include "header.h"
 
+void DATA_PEMAIN()//baru thee
+{
+
+
+	//INISIALISASI
+     data.score = 0;///DI SINI SCORE SI AKUN DI ISI 0
+  //OUTPUT VIEWER
+     system("cls");
+  //PEMBUATAN FILE UNTUK ACCOUNT
+     printf("SILAKAN MEMBUAT AKUN ANDA\n ");
+     printf("user name: ");
+     fflush(stdin);
+	 scanf("%s",&namafile);
+        PF = fopen(namafile,"wb");///bikin file nya
+          if(PF==NULL)
+            {
+				printf("gagal membuat file , <Press Any Key>");
+             	getch();
+			 	exit(1);
+			}
+			printf("nama\n");
+			scanf("%s",&data.nama);
+			printf("inisial\n");
+			scanf("%s",&data.inisial);
+			fwrite(&data,sizeof(data),1,PF);
+        	fclose(PF);
+
+    printf("Good Luck %s",data.nama);///buat di maint
+}
+void LOGIN()//baru thee
+{
+	//OUTPUT VIEWER
+    system("cls");
+//    HEADER__();
+    //MEMBUKA ACCOUNT
+          printf("USER NAME");
+          printf("USERNAME.DAT = ");
+		  fflush(stdin);
+		  scanf("%s",&masuk);
+             PF=fopen(masuk,"rb");
+             system("cls");
+             //CHECK_();
+                    if(PF==NULL)
+                      {
+					  	printf("USER NAME YANG ANDA MASUKAN TIDAK TERDAFTAR ATAU SALAH\n");
+                       	printf("Press Any Key to Create Account ");
+						getch();
+						DATA_PEMAIN();
+						}
+    //MENAMPILKAN ACCOUNT
+          system("cls");
+          printf("Your Account is : \n\n\n\n");
+        	while((fread(&data,sizeof(data),1,PF)) == 1)
+                 printf("	%-15s	%-15s	%d\r\n",data.nama,data.inisial,data.score);
+             fclose(PF);
+}
+
 
 
 void Game_Over()
@@ -31,24 +88,20 @@ void Game_Over()
     	GetCursorPos(&cpos);
     	if (GetAsyncKeyState(VK_LBUTTON))
     	{
-		
-    		if((cpos.x>=180 && cpos.y>=370) && (cpos.x<=390 && cpos.y<=420)) 
+
+    		if((cpos.x>=110 && cpos.y>=440) && (cpos.x<=230 && cpos.y<=540))
             {
                 Play_Game();
             }
-            if((cpos.x>=430 && cpos.y>=370) && (cpos.x<=630 && cpos.y<=420)) 
+            if((cpos.x>=430 && cpos.y>=370) && (cpos.x<=630 && cpos.y<=420))
             {
             	closegraph();
                 main();
             }
     	}
-	}    
-   
+	}
+
 }
-
-
-
-
 void gambar_tembok()
 {
     int i, j, x,y;
@@ -68,7 +121,7 @@ void gambar_tembok()
             {
                 x=i*10;
                 y=j*10;
-                readimagefile("pic/tembok.bmp",x,y,x+10,y+10);
+                readimagefile("pic/bata.bmp",x,y,x+10,y+10);
             }
              if (all_stage[j][i].objekprint==5)
             {
@@ -83,7 +136,6 @@ void gambar_tembok()
                 readimagefile("pic/garuda.bmp",x,y,x+40,y+40);
                 resmi=false;
             }
-
         }
     }
 }
@@ -536,14 +588,15 @@ void Gerak_bawah(TANK *tank, int speed)
         Vtank(&(*tank));
 }
 
-void Set_map(int t_stage[MAX][MAX])
+void Set_map(int t_stage[MAX][MAX]) //baru (thee)
 {
     int i,j;
+    readimagefile("pic/samping",0,0,140,483);
     for(i=0;i<MAX;i++)
     {
         for(j=0;j<MAX;j++)
         {
-            if(t_stage[j][i]==0 || t_stage[j][i]==1 || t_stage[j][i]==3 || t_stage[j][i]==4 || t_stage[j][i]==5 || t_stage[j][i]==6 || t_stage[j][i]==7 || t_stage[j][i]==11)
+            if(t_stage[j][i]==0 || t_stage[j][i]==1 || t_stage[j][i]==3 || t_stage[j][i]==4 || t_stage[j][i]==5 || t_stage[j][i]==6 || t_stage[j][i]==7 || t_stage[j][i]==11 || t_stage[j][i]==12)
             {
                 all_stage[j][i].objekprint=t_stage[j][i];
                 all_stage[j][i].objektimpa=0;
@@ -684,15 +737,23 @@ void Gerak_peluru(TANK *tank,TANK *tank2,TANK *tank3,TANK *tank4,boolean *garuda
             tank->kordinat_peluru.x[0] += 1;
             tank->kordinat_peluru.x[1] += 1;
 
-            int x=1; ///baru (thee)
-            if((all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objekprint==3 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objekprint==3) || (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objekprint==11 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objekprint==11) || ((all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objekprint==0 && all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objektimpa==0) && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objekprint==3) || (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objekprint==3 && (all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objekprint==0 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objektimpa==0))) //buat ngehancurin tembok
+            int x=1;
+            if((all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objekprint==3 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objekprint==3) || ((all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objekprint==0 && all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objektimpa==0) && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objekprint==3) || (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objekprint==3 && (all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objekprint==0 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objektimpa==0))) //buat ngehancurin tembok
             {   //Tembok & Tembok                                       Kosong & Tembok                                        Kosong & Tembok
                 all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objekprint=0;
                 all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objekprint=0;
                 setfillstyle(SOLID_FILL,BLACK);
                 bar(tank->gambar_peluru.x[0]+9,tank->gambar_peluru.y[0]-11,tank->gambar_peluru.x[0]+21,tank->gambar_peluru.y[0]+11);
-                *garuda=false;
+
             }
+            if (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objekprint==11 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objekprint==11)
+            { // Garuda & Garuda          baru (thee)
+            	all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objekprint=0;
+                all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objekprint=0;
+                setfillstyle(SOLID_FILL,BLACK);
+                bar(tank->gambar_peluru.x[0]+9,tank->gambar_peluru.y[0]-11,tank->gambar_peluru.x[0]+21,tank->gambar_peluru.y[0]+11);
+                *garuda=false;
+			}
             if (all_stage[tank->kordinat_peluru.y[0]][tank->kordinat_peluru.x[0]-x].objekprint==3 && all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objektimpa==4)
             { ///ATAS TEMBOK, BAWAH RUMPUT
                 all_stage[tank->kordinat_peluru.y[1]][tank->kordinat_peluru.x[1]-x].objektimpa=4;
@@ -862,7 +923,7 @@ void Gerak_peluru(TANK *tank,TANK *tank2,TANK *tank3,TANK *tank4,boolean *garuda
                     setfillstyle(SOLID_FILL,BLACK);
                     bar(tank->gambar_peluru.x[0]-51,tank->gambar_peluru.y[0]-21,tank->gambar_peluru.x[0]-9,tank->gambar_peluru.y[0]+21);
                     /*ini ganti sama animasi/gambar garuda ancur, Saudara PHUU(kordinat di atas pake udah benar)*/
-                    *garuda=false;  ///kondisi dimana akan kalah
+                   // *garuda=false;  ///kondisi dimana akan kalah
 
                     tank->score += 50;
                     tank->life -= 1;
@@ -997,15 +1058,23 @@ void Gerak_peluru(TANK *tank,TANK *tank2,TANK *tank3,TANK *tank4,boolean *garuda
             tank->kordinat_peluru.y[0] += 1;
             tank->kordinat_peluru.y[1] += 1;
 
-            int x=1; //di rubah (thee)
-            if((all_stage[tank->kordinat_peluru.y[0]-x][tank->kordinat_peluru.x[0]].objekprint==3 && all_stage[tank->kordinat_peluru.y[1]-x][tank->kordinat_peluru.x[1]].objekprint==3) ||(all_stage[tank->kordinat_peluru.y[0]-x][tank->kordinat_peluru.x[0]].objekprint==11 && all_stage[tank->kordinat_peluru.y[1]-x][tank->kordinat_peluru.x[1]].objekprint==11) || ((all_stage[tank->kordinat_peluru.y[0]-x][tank->kordinat_peluru.x[0]].objekprint==0 && all_stage[tank->kordinat_peluru.y[0]-x][tank->kordinat_peluru.x[0]].objektimpa==0) && all_stage[tank->kordinat_peluru.y[1]-x][tank->kordinat_peluru.x[1]].objekprint==3) || (all_stage[tank->kordinat_peluru.y[0]-x][tank->kordinat_peluru.x[0]].objekprint==3 && (all_stage[tank->kordinat_peluru.y[1]-x][tank->kordinat_peluru.x[1]].objekprint==0 && all_stage[tank->kordinat_peluru.y[1]-x][tank->kordinat_peluru.x[1]].objektimpa==0)))
+            int x=1;
+            if((all_stage[tank->kordinat_peluru.y[0]-x][tank->kordinat_peluru.x[0]].objekprint==3 && all_stage[tank->kordinat_peluru.y[1]-x][tank->kordinat_peluru.x[1]].objekprint==3) || ((all_stage[tank->kordinat_peluru.y[0]-x][tank->kordinat_peluru.x[0]].objekprint==0 && all_stage[tank->kordinat_peluru.y[0]-x][tank->kordinat_peluru.x[0]].objektimpa==0) && all_stage[tank->kordinat_peluru.y[1]-x][tank->kordinat_peluru.x[1]].objekprint==3) || (all_stage[tank->kordinat_peluru.y[0]-x][tank->kordinat_peluru.x[0]].objekprint==3 && (all_stage[tank->kordinat_peluru.y[1]-x][tank->kordinat_peluru.x[1]].objekprint==0 && all_stage[tank->kordinat_peluru.y[1]-x][tank->kordinat_peluru.x[1]].objektimpa==0)))
             {   //Tembok & Tembok                                       Kosong & Tembok                                        Kosong & Tembok
                 all_stage[tank->kordinat_peluru.y[0]-x][tank->kordinat_peluru.x[0]].objekprint=0;
                 all_stage[tank->kordinat_peluru.y[1]-x][tank->kordinat_peluru.x[1]].objekprint=0;
                 setfillstyle(SOLID_FILL,BLACK);
                 bar(tank->gambar_peluru.x[0]-11,tank->gambar_peluru.y[0]+9,tank->gambar_peluru.x[0]+11,tank->gambar_peluru.y[0]+21);
-                *garuda=false;
+
             }
+            if (all_stage[tank->kordinat_peluru.y[0]-x][tank->kordinat_peluru.x[0]].objekprint==11 && all_stage[tank->kordinat_peluru.y[1]-x][tank->kordinat_peluru.x[1]].objekprint==11)
+            {   //Garuda & Garuda                               baru(thee)
+            	all_stage[tank->kordinat_peluru.y[0]-x][tank->kordinat_peluru.x[0]].objekprint=0;
+                all_stage[tank->kordinat_peluru.y[1]-x][tank->kordinat_peluru.x[1]].objekprint=0;
+                setfillstyle(SOLID_FILL,BLACK);
+                bar(tank->gambar_peluru.x[0]-11,tank->gambar_peluru.y[0]+9,tank->gambar_peluru.x[0]+11,tank->gambar_peluru.y[0]+21);
+                *garuda=false;
+			}
             if (all_stage[tank->kordinat_peluru.y[0]-x][tank->kordinat_peluru.x[0]].objektimpa==4 && all_stage[tank->kordinat_peluru.y[1]-x][tank->kordinat_peluru.x[1]].objekprint==3)
             {   ///kiri RUMPUT, kanan TEMBOK
                 all_stage[tank->kordinat_peluru.y[0]-x][tank->kordinat_peluru.x[0]].objektimpa=4;
